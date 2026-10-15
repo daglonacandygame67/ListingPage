@@ -2,215 +2,162 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GCRobbie's Marketplace</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sell your Brawl Stars account | GCRobbie's Marketplace</title>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  color-scheme: light;
-  --bg:#e9e3ff; --card:#ffffff; --ink:#1b1140; --muted:#5d5486; --line:#1b1140;
-  --brand:#ffc928; --brand-ink:#1b1140; --accent:#7c3cff; --ok:#1f9d55; --sold:#c0392b; --chip:#efeaff;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme: dark;
-    --bg:#1a1040; --card:#2a1b66; --ink:#fff7da; --muted:#b9acf0; --line:#0c0624;
-    --brand:#ffc928; --brand-ink:#1b1140; --accent:#a77bff; --ok:#4fd88a; --sold:#ff7b6b; --chip:#3a2a85;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme: dark;
-  --bg:#1a1040; --card:#2a1b66; --ink:#fff7da; --muted:#b9acf0; --line:#0c0624;
-  --brand:#ffc928; --brand-ink:#1b1140; --accent:#a77bff; --ok:#4fd88a; --sold:#ff7b6b; --chip:#3a2a85;
-}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{color-scheme:light;--bg:#e9e3ff;--card:#fff;--ink:#1b1140;--muted:#5d5486;--line:#1b1140;--brand:#ffc928;--accent:#7c3cff;--chip:#efeaff;--bad:#c0392b;--ok:#1f9d55}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#1a1040;--card:#2a1b66;--ink:#fff7da;--muted:#b9acf0;--line:#0c0624;--accent:#a77bff;--chip:#3a2a85;--bad:#ff7b6b;--ok:#4fd88a}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.5 'Nunito',system-ui,sans-serif}
-h1,h2,h3,.btn,.price{font-family:'Lilita One','Arial Black',Impact,sans-serif;font-weight:400;letter-spacing:.01em}
-header{padding:36px 20px 20px;max-width:1100px;margin:0 auto}
-h1{font-size:clamp(2.2rem,7vw,4rem);margin:0;line-height:1;color:var(--brand);
-  -webkit-text-stroke:0;text-shadow:3px 3px 0 var(--line),-1px -1px 0 var(--line),1px -1px 0 var(--line),-1px 1px 0 var(--line)}
-header p{margin:10px 0 0;color:var(--muted);max-width:60ch}
-.bar{max-width:1100px;margin:0 auto;padding:0 20px 16px;display:flex;flex-wrap:wrap;gap:10px}
-.bar input,.bar select{font:inherit;padding:10px 14px;border:3px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);min-width:0}
-.bar input{flex:1 1 220px}
-.count{max-width:1100px;margin:0 auto;padding:0 20px 8px;color:var(--muted)}
-main{max-width:1100px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.card{background:var(--card);border:3px solid var(--line);border-radius:18px;box-shadow:0 6px 0 var(--line);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:left;padding:0;color:inherit;font:inherit}
-.card:focus-visible,.btn:focus-visible,.thumb:focus-visible,.x:focus-visible{outline:4px solid var(--accent);outline-offset:2px}
-.card:active{transform:translateY(3px);box-shadow:0 3px 0 var(--line)}
-.pic{aspect-ratio:16/10;background:linear-gradient(135deg,var(--accent),var(--brand));position:relative;display:grid;place-items:center;font-family:'Lilita One',sans-serif;font-size:2.4rem;color:#fff}
-.pic img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
-.tag{position:absolute;top:10px;left:10px;z-index:1;padding:3px 12px;border-radius:99px;border:3px solid var(--line);background:var(--ok);color:#fff;font-family:'Lilita One',sans-serif;font-size:.95rem}
-.tag.sold{background:var(--sold)}
-.body{padding:14px 16px 16px}
-.body h3{margin:0 0 6px;font-size:1.3rem}
-.price{font-size:1.6rem;color:var(--accent)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.chip{background:var(--chip);border-radius:8px;padding:2px 9px;font-size:.85rem;font-weight:800}
-.empty{grid-column:1/-1;text-align:center;padding:50px 10px;color:var(--muted)}
-/* modal */
-.modal{position:fixed;inset:0;background:rgba(10,5,30,.75);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 14px calc(20px + env(safe-area-inset-bottom,0px));z-index:20}
-.modal.open{display:flex}
-.sheet{background:var(--card);border:3px solid var(--line);border-radius:20px;max-width:760px;width:100%;position:relative;overflow:hidden}
-.x{position:absolute;top:10px;right:10px;z-index:3;width:42px;height:42px;border-radius:50%;border:3px solid var(--line);background:var(--brand);color:var(--brand-ink);font-family:'Lilita One',sans-serif;font-size:1.2rem;cursor:pointer}
-.main-pic{aspect-ratio:16/10;background:#000;display:grid;place-items:center;position:relative}
-.main-pic img{width:100%;height:100%;object-fit:contain}
-.thumbs{display:flex;gap:8px;padding:10px 16px 0;overflow-x:auto}
-.thumb{flex:0 0 76px;height:52px;border:3px solid var(--line);border-radius:8px;overflow:hidden;padding:0;background:#000;cursor:pointer;opacity:.65}
-.thumb[aria-current="true"]{opacity:1;border-color:var(--accent)}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.info{padding:16px 20px 22px}
-.info h2{margin:0;font-size:1.8rem}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}
-.stat{background:var(--chip);border-radius:12px;padding:8px 12px}
-.stat b{display:block;font-family:'Lilita One',sans-serif;font-weight:400;font-size:1.25rem}
-.stat span{color:var(--muted);font-size:.85rem}
-.desc{white-space:pre-line;color:var(--ink)}
-.btn{display:inline-block;margin-top:14px;padding:12px 22px;border:3px solid var(--line);border-radius:14px;background:var(--brand);color:var(--brand-ink);font-size:1.15rem;text-decoration:none;box-shadow:0 4px 0 var(--line);cursor:pointer}
-.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--line)}
-footer{text-align:center;color:var(--muted);padding:0 20px 40px;font-size:.9rem}
-@media (prefers-reduced-motion:no-preference){.modal.open .sheet{animation:pop .18s ease-out}}
-@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+h1,h2,button{font-family:'Lilita One','Arial Black',sans-serif;font-weight:400}
+header,form,.done{max-width:720px;margin:0 auto;padding:0 18px}
+header{padding-top:32px}
+h1{font-size:clamp(2rem,7vw,3.4rem);margin:0;line-height:1;color:var(--brand);text-shadow:3px 3px 0 var(--line),-1px -1px 0 var(--line),1px -1px 0 var(--line),-1px 1px 0 var(--line)}
+header p{color:var(--muted)}
+form{padding-bottom:50px}
+fieldset{border:3px solid var(--line);border-radius:18px;background:var(--card);margin:16px 0;padding:14px 16px 18px}
+legend{font-family:'Lilita One',sans-serif;font-size:1.2rem;padding:0 8px}
+label{display:block;font-weight:800;margin-top:10px}
+input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:3px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px}
+small,.hint{color:var(--muted);font-weight:600}
+.preview{background:var(--chip);border-radius:12px;padding:10px 14px;margin-top:10px}
+.preview b{font-family:'Lilita One',sans-serif;font-weight:400;font-size:1.3rem;color:var(--accent)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px}
+.photos div{position:relative;aspect-ratio:1;border:3px solid var(--line);border-radius:10px;overflow:hidden}
+.photos img{width:100%;height:100%;object-fit:cover}
+.photos button{position:absolute;top:2px;right:2px;width:26px;height:26px;border-radius:50%;border:2px solid var(--line);background:var(--brand);cursor:pointer}
+.go{width:100%;margin-top:6px;padding:14px;border:3px solid var(--line);border-radius:14px;background:var(--brand);color:#1b1140;font-size:1.3rem;box-shadow:0 4px 0 var(--line);cursor:pointer}
+.go:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:12px;font-weight:800}.msg.err{color:var(--bad)}
+.hp{position:absolute;left:-9999px}
+.done{display:none;text-align:center;padding-top:40px}
+:focus-visible{outline:4px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
 <header>
-  <h1>GCRobbie's Marketplace</h1>
-  <p id="intro">Brawl Stars accounts with real screenshots, no surprises. Tap a listing to see every picture.</p>
+  <h1>Sell your Brawl Stars account</h1>
+  <p>Fill this in and add screenshots. Your listing is posted on GCRobbie's Marketplace under GCRobbie's name once it has been checked.</p>
 </header>
 
-<div class="bar">
-  <input id="q" type="search" placeholder="Search brawlers, rank, price..." aria-label="Search listings">
-  <select id="status" aria-label="Filter by status">
-    <option value="all">All</option><option value="available">Available</option><option value="sold">Sold</option>
-  </select>
-  <select id="trophy" aria-label="Filter by trophies">
-    <option value="all">All trophies</option><option value="10-50">10k - 50k</option>
-    <option value="50-100">50k - 100k</option><option value="100-200">100k - 200k</option>
-  </select>
-  <select id="rank" aria-label="Filter by rank">
-    <option value="all">All ranks</option><option>Mythic</option><option>Legendary</option><option>Masters</option><option>Pro</option>
-  </select>
-  <select id="sort" aria-label="Sort listings">
-    <option value="new">Newest</option><option value="low">Price: low to high</option>
-    <option value="high">Price: high to low</option><option value="trophies">Most trophies</option>
-  </select>
-</div>
-<div class="count" id="count" aria-live="polite"></div>
-<main id="grid"></main>
-<footer id="foot"></footer>
+<form id="f" novalidate>
+  <fieldset><legend>Account</legend>
+    <label>Listing title<input name="title" maxlength="80" required placeholder="e.g. 62k trophies, Masters, 14 legendaries"></label>
+    <div class="grid">
+      <label>Rank<select name="rank" required><option value="">Choose...</option><option>Below Mythic</option><option>Mythic</option><option>Legendary</option><option>Masters</option><option>Pro</option></select></label>
+      <label>Trophies<input name="trophies" type="number" min="0" max="500000" required></label>
+      <label>Brawlers<input name="brawlers" type="number" min="0" max="200"></label>
+      <label>Legendaries<input name="legendaries" type="number" min="0" max="100"></label>
+      <label>Skins<input name="skins" type="number" min="0" max="1000"></label>
+      <label>Gems<input name="gems" type="number" min="0" max="1000000"></label>
+      <label>Hypercharges<input name="hypercharges" type="number" min="0" max="100"></label>
+    </div>
+    <label>Description<textarea name="description" rows="4" maxlength="1500" placeholder="Anything buyers should know: power levels, rare skins, linked accounts..."></textarea></label>
+  </fieldset>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Listing details">
-  <div class="sheet" id="sheet"></div>
+  <fieldset><legend>Price</legend>
+    <label>Your price ($)<input name="price" type="number" min="1" max="30000" step="1" required></label>
+  </fieldset>
+
+  <fieldset><legend>Photos</legend>
+    <input id="files" type="file" accept="image/*" multiple>
+    <p class="hint">Up to 8 screenshots, 10 MB each. Show your brawlers, trophies, rank and skins.</p>
+    <div class="photos" id="thumbs"></div>
+  </fieldset>
+
+  <fieldset><legend>Confirm</legend>
+    <label style="font-weight:600"><input type="checkbox" name="agree" style="width:auto;margin-right:8px" required>I own this account and I'm allowed to sell it.</label>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+  </fieldset>
+
+  <button class="go" id="go" type="submit">Submit my account</button>
+  <div class="msg" id="msg" role="status"></div>
+</form>
+
+<div class="done" id="done">
+  <h2 style="font-size:2rem">Submitted!</h2>
+  <p>Thanks. Your account will appear on GCRobbie's Marketplace after it has been checked, .</p>
+  <button class="go" onclick="location.reload()" style="max-width:300px">Submit another</button>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-/* ============================================================
-   SETTINGS: edit these
-   ============================================================ */
-const SETTINGS = {
-  currency: "$",
-  contactLabel: "Message me to buy",
-  contactLink: "https://discord.com/users/YOUR_ID",   // Discord, Telegram, email (mailto:you@mail.com), etc.
-  footer: "Payments and delivery are agreed directly with GCRobbie.",
-  // Paste your Firebase web config here (Project settings > Your apps). Leave as is to show only the listings below.
-  firebase: { apiKey:"AIzaSyCkzLD8tdaGN2-qoARnqw68LTzG7lsCSDE", authDomain:"gcrobbiestore.firebaseapp.com", projectId:"gcrobbiestore", storageBucket:"gcrobbiestore.firebasestorage.app", messagingSenderId:"266901259068", appId:"1:266901259068:web:ba1c4101bfb1b451c9d439", measurementId:"G-SFZ0RP67TV" }
-};
+import { getFirestore, collection, doc, writeBatch, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* ============================================================
-   LISTINGS: one object per account.
-   images: list of picture sources. Use data: URIs (the page can't load
-   pictures from other websites). Leave [] to show a placeholder.
-   status: "available" or "sold"
-   ============================================================ */
-const LISTINGS = [];
+/* ===== SETTINGS: edit these ===== */
+const FIREBASE = { apiKey:"AIzaSyCkzLD8tdaGN2-qoARnqw68LTzG7lsCSDE", authDomain:"gcrobbiestore.firebaseapp.com", projectId:"gcrobbiestore", storageBucket:"gcrobbiestore.firebasestorage.app", messagingSenderId:"266901259068", appId:"1:266901259068:web:ba1c4101bfb1b451c9d439", measurementId:"G-SFZ0RP67TV" };
+const CLOUDINARY = { cloudName:"hkc7ecw7", uploadPreset:"Idkqowos" };
+const MARKUP = 3;           // marketplace price = seller price x 3
+const MAX_PHOTOS = 8, MAX_MB = 10;
+/* ================================ */
 
-/* ============================================================ */
 const $ = s => document.querySelector(s);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money = n => SETTINGS.currency + Number(n).toLocaleString();
-const num = n => Number(n || 0).toLocaleString();
-let current = null, lastFocus = null;
-const ALL = LISTINGS.map(l => ({...l, created: l.id}));
-const fb = SETTINGS.firebase;
-if (fb && fb.apiKey && !fb.apiKey.startsWith("YOUR")) {
-  try {
-    const db = getFirestore(initializeApp(fb));
-    const snap = await getDocs(query(collection(db, "listings"), where("status", "in", ["approved", "sold"])));
-    snap.forEach(d => { const x = d.data(); ALL.push({...x, id: d.id, created: x.createdAt?.toMillis?.() || 0, images: x.images || []}); });
-  } catch (e) { console.error("Could not load listings", e); }
-}
+const f = $("#f"), msg = $("#msg");
+let photos = [];   // File objects
 
-function pic(l, big){
-  const first = l.images && l.images[0];
-  return first ? `<img src="${esc(first)}" alt="${esc(l.title)} screenshot" loading="lazy">`
-               : `<span>${esc(l.title.replace(/[^A-Za-z]/g,'').slice(0,2) || 'BS')}</span>`;
-}
 
-function render(){
-  const q = $("#q").value.trim().toLowerCase(), st = $("#status").value, so = $("#sort").value, tr = $("#trophy").value, rk = $("#rank").value;
-  let list = ALL.filter(l =>
-    (st === "all" || l.status === st) &&
-    (tr === "all" || (l.trophies >= +tr.split("-")[0]*1000 && l.trophies < +tr.split("-")[1]*1000)) &&
-    (rk === "all" || l.rank === rk) &&
-    (!q || JSON.stringify(l).toLowerCase().replace(/data:[^"]*/g,'').includes(q)));
-  if (so === "low") list.sort((a,b)=>a.price-b.price);
-  else if (so === "high") list.sort((a,b)=>b.price-a.price);
-  else if (so === "trophies") list.sort((a,b)=>b.trophies-a.trophies);
-  else list.sort((a,b)=>(b.created||0)-(a.created||0));
-  $("#count").textContent = list.length + (list.length === 1 ? " account" : " accounts");
-  $("#grid").innerHTML = list.length ? list.map(l => `
-    <button class="card" data-id="${l.id}" aria-label="Open ${esc(l.title)}">
-      <div class="pic"><span class="tag ${l.status==='sold'?'sold':''}">${l.status==='sold'?'Sold':'Available'}</span>${pic(l)}</div>
-      <div class="body">
-        <h3>${esc(l.title)}</h3>
-        <div class="price">${money(l.price)}</div>
-        <div style="color:var(--muted);font-size:.85rem">Listed by GCRobbie</div>
-        <div class="chips">
-          <span class="chip">${num(l.trophies)} trophies</span>
-          <span class="chip">${esc(l.rank)}</span>
-          <span class="chip">${l.brawlers} brawlers</span>
-        </div>
-      </div>
-    </button>`).join("") : `<div class="empty"><h3>No accounts match</h3>Try a different search or filter.</div>`;
-}
-
-function show(l, idx = 0){
-  current = l;
-  const imgs = l.images || [];
-  const stats = [["Trophies",num(l.trophies)],["Rank",l.rank],["Brawlers",l.brawlers],["Legendaries",l.legendaries],
-                 ["Skins",l.skins],["Gems",num(l.gems)],["Hypercharges",l.hypercharges]].filter(s=>s[1]!==undefined && s[1]!=="");
-  $("#sheet").innerHTML = `
-    <button class="x" aria-label="Close">X</button>
-    <div class="main-pic">${imgs.length ? `<img src="${esc(imgs[idx])}" alt="${esc(l.title)} picture ${idx+1} of ${imgs.length}">` : `<div class="pic" style="width:100%;height:100%"><span>${esc(l.title.replace(/[^A-Za-z]/g,'').slice(0,2)||'BS')}</span></div>`}</div>
-    ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((s,i)=>`<button class="thumb" data-i="${i}" aria-label="Picture ${i+1}" ${i===idx?'aria-current="true"':''}><img src="${esc(s)}" alt=""></button>`).join("")}</div>` : ""}
-    <div class="info">
-      <h2>${esc(l.title)}</h2>
-      <div class="price">${money(l.price)} &nbsp;<span class="chip" style="font-family:Nunito">${l.status==='sold'?'Sold':'Available'}</span></div>
-      <div class="stats">${stats.map(s=>`<div class="stat"><b>${esc(s[1])}</b><span>${s[0]}</span></div>`).join("")}</div>
-      <p style="color:var(--muted);margin:0 0 8px">Listed by GCRobbie</p><div class="desc">${esc(l.description)}</div>
-      ${l.status==='sold' ? "" : `<a class="btn" href="${esc(SETTINGS.contactLink)}" target="_blank" rel="noopener">${esc(SETTINGS.contactLabel)}</a>`}
-    </div>`;
-}
-
-function open(l){ lastFocus = document.activeElement; show(l); $("#modal").classList.add("open"); document.body.style.overflow="hidden"; $(".x").focus(); }
-function close(){ $("#modal").classList.remove("open"); document.body.style.overflow=""; lastFocus && lastFocus.focus(); }
-
-$("#grid").addEventListener("click", e => { const c = e.target.closest(".card"); if (c) open(ALL.find(l=>l.id==c.dataset.id)); });
-$("#modal").addEventListener("click", e => {
-  if (e.target.id === "modal" || e.target.closest(".x")) return close();
-  const t = e.target.closest(".thumb"); if (t) show(current, +t.dataset.i);
+$("#files").addEventListener("change", e => {
+  for (const file of e.target.files) {
+    if (!file.type.startsWith("image/")) continue;
+    if (file.size > MAX_MB * 1048576) { say(file.name + " is over " + MAX_MB + " MB.", true); continue; }
+    if (photos.length >= MAX_PHOTOS) { say("Maximum " + MAX_PHOTOS + " photos.", true); break; }
+    photos.push(file);
+  }
+  e.target.value = ""; drawThumbs();
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-["#q","#status","#trophy","#rank","#sort"].forEach(s => $(s).addEventListener("input", render));
-$("#foot").textContent = SETTINGS.footer;
-render();
+function drawThumbs(){
+  $("#thumbs").innerHTML = "";
+  photos.forEach((file, i) => {
+    const d = document.createElement("div");
+    d.innerHTML = `<img alt="Photo ${i+1}"><button type="button" aria-label="Remove photo ${i+1}">x</button>`;
+    d.querySelector("img").src = URL.createObjectURL(file);
+    d.querySelector("button").onclick = () => { photos.splice(i, 1); drawThumbs(); };
+    $("#thumbs").append(d);
+  });
+}
+function say(t, err){ msg.textContent = t; msg.className = "msg" + (err ? " err" : ""); }
+
+async function upload(file){
+  const fd = new FormData();
+  fd.append("file", file); fd.append("upload_preset", CLOUDINARY.uploadPreset);
+  const r = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY.cloudName}/image/upload`, { method:"POST", body: fd });
+  if (!r.ok) throw new Error("Photo upload failed");
+  return (await r.json()).secure_url;
+}
+
+f.addEventListener("submit", async e => {
+  e.preventDefault();
+  if (f.website.value) return;                       // spam trap
+  if (!f.checkValidity()) { f.reportValidity(); return; }
+  if (!photos.length) return say("Add at least one photo.", true);
+  const go = $("#go"); go.disabled = true;
+  try {
+    say("Uploading photos...");
+    const urls = [];
+    for (const p of photos) urls.push(await upload(p));
+    say("Saving your listing...");
+    const db = getFirestore(initializeApp(FIREBASE));
+    const ref = doc(collection(db, "listings"));
+    const n = k => Math.max(0, +f[k].value || 0);
+    const sellerPrice = +f.price.value;
+    const batch = writeBatch(db);
+    batch.set(ref, {                                  // public: only the marked-up price
+      title: f.title.value.trim(), price: Math.round(sellerPrice * MARKUP), status: "pending",
+      rank: f.rank.value, trophies: n("trophies"), brawlers: n("brawlers"), legendaries: n("legendaries"),
+      skins: n("skins"), gems: n("gems"), hypercharges: n("hypercharges"),
+      description: f.description.value.trim(), images: urls, createdAt: serverTimestamp()
+    });
+    batch.set(doc(db, "private", ref.id), {           // private: seller price only
+      sellerPrice, createdAt: serverTimestamp()
+    });
+    await batch.commit();
+    f.style.display = "none"; document.querySelector("header").style.display = "none"; $("#done").style.display = "block";
+  } catch (err) {
+    console.error(err); say("Something went wrong. Please try again.", true); go.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
